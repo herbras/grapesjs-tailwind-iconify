@@ -1,26 +1,69 @@
 {
-    "name": "grapesjs-tailwind",
-    "version": "1.0.11",
-    "description": "Grapesjs Tailwind",
+    "name": "grapesjs-tailwind-iconify",
+    "version": "1.0.1",
+    "description": "Enhanced fork of grapesjs-tailwind with Custom Components Manager and Iconify integration",
     "main": "dist/grapesjs-tailwind.min.js",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Ju99ernaut/grapesjs-tailwind.git"
-    },
+    "module": "dist/grapesjs-tailwind.esm.js",
+    "unpkg": "dist/grapesjs-tailwind.min.js",
+    "jsdelivr": "dist/grapesjs-tailwind.min.js",
+    "files": [
+        "dist",
+        "src",
+        "README.md"
+    ],
     "scripts": {
-        "start": "grapesjs-cli serve",
-        "build": "grapesjs-cli build",
-        "bump": "npm version patch -m 'Bump v%s'"
+        "start": "vite",
+        "dev": "vite",
+        "prebuild": "npm run clean",
+        "build": "vite build",
+        "postbuild": "npm run build:cdn && npm run copy:public",
+        "clean": "rimraf dist",
+        "build:cdn": "npm run build:cdn:main && npm run build:cdn:manager",
+        "build:cdn:main": "vite build --config vite.cdn.config.js --mode main",
+        "build:cdn:manager": "vite build --config vite.cdn.config.js --mode manager",
+        "copy:public": "powershell -Command \"if (!(Test-Path public)) { New-Item -ItemType Directory public }; Copy-Item dist/grapesjs-tailwind.min.js public/\"",
+        "preview": "vite preview",
+        "serve": "vite preview --port 3000",
+        "build:watch": "vite build --watch",
+        "test:local": "npm run serve",
+        "publish:prepare": "npm run build && npm pack --dry-run",
+        "publish:npm": "npm publish --access public",
+        "release": "npm run build && npm publish --access public"
     },
     "keywords": [
         "grapesjs",
-        "plugin"
+        "tailwind",
+        "tailwindcss",
+        "page-builder",
+        "visual-editor",
+        "custom-components",
+        "cdn"
     ],
-    "devDependencies": {
-        "grapesjs-cli": "^2.0.0"
-    },
+    "author": "Ibrahim Nurul Huda <ibrahim@sarbeh.com>",
     "license": "MIT",
-    "dependencies": {
-        "css": "^3.0.0"
-    }
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/herbras/grapesjs-tailwind.git"
+    },
+    "bugs": {
+        "url": "https://github.com/herbras/grapesjs-tailwind/issues"
+    },
+    "homepage": "https://herbras.github.io/grapesjs-tailwind/",
+    "peerDependencies": {
+        "grapesjs": "^0.19.0 || ^0.20.0 || ^0.21.0"
+    },
+    "devDependencies": {
+        "vite": "^4.4.0",
+        "rimraf": "^5.0.1",
+        "@rollup/plugin-node-resolve": "^15.1.0",
+        "@rollup/plugin-commonjs": "^25.0.2",
+        "@rollup/plugin-terser": "^0.4.3",
+        "rollup-plugin-peer-deps-external": "^2.2.4"
+    },
+    "dependencies": {},
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ]
 }

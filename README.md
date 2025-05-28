@@ -1,16 +1,27 @@
-# Grapesjs Tailwind(WIP)
+# Grapesjs Tailwind with custom block + Iconify
 
-[DEMO](https://codepen.io/ju99ernaut/pen/BaKGadb)
+[DEMO](https://herbras.github.io/grapesjs-tailwind/)
+
+> 🚀 **Enhanced fork** of [Ju99ernaut/grapesjs-tailwind](https://github.com/Ju99ernaut/grapesjs-tailwind) with added **Custom Components Manager** and **Iconify Icons** support.
+
+Tailwind CSS integration for GrapesJS with **Custom Components Manager** and **Iconify Icons** support.
+
+**Key Features:**
+- 🎨 Complete Tailwind CSS integration with custom config support  
+- 🧩 **NEW:** Custom Component Manager for loading external blocks
+- 🔥 **NEW:** Iconify integration with 150,000+ icons from 120+ icon sets
+- 📦 **NEW:** Load components from CDN, JSON, or local sources
+- ⚡ Built-in Tailblocks.cc components (from original)
 
 > Requires [`grapesjs-plugin-forms`](https://github.com/artf/grapesjs-plugin-forms)
 
-Tailwind intergration which includes the complete set of blocks from [Tailblocks.cc](https://tailblocks.cc/), bases on [Destack](https://github.com/LiveDuo/destack).
+## 🚀 Quick Start
 
 ### HTML
 ```html
 <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
 <script src="https://unpkg.com/grapesjs"></script>
-<script src="https://unpkg.com/grapesjs-tailwind"></script>
+<script src="https://unpkg.com/grapesjs-tailwind-iconify"></script>
 
 <div id="gjs"></div>
 ```
@@ -26,7 +37,21 @@ const editor = grapesjs.init({
   fromElement: true,
   storageManager: false,
   selectorManager: { escapeName },
-  plugins: ['grapesjs-tailwind'],
+  plugins: ['grapesjs-tailwind-iconify'],
+  pluginsOpts: {
+    'grapesjs-tailwind-iconify': {
+      // Load custom components from external sources
+      customComponents: {
+        enabled: true,
+        cdnEndpoints: [
+          'https://cdn.example.com/my-custom-blocks.js'
+        ],
+        jsonSources: [
+          'https://api.example.com/blocks.json'
+        ]
+      }
+    }
+  }
 });
 ```
 
@@ -45,14 +70,10 @@ body, html {
 }
 
 .change-theme-button:focus {
-  /* background-color: yellow; */
   outline: none;
   box-shadow: 0 0 0 2pt #c5c5c575;
 }
-```
 
-### `Optional` CSS
-```css
 /* Make blocks full width */
 .gjs-block {
     padding: 0 !important;
@@ -66,126 +87,129 @@ body, html {
 }
 ```
 
+## 🧩 Custom Components Manager
 
-## Summary
-
-* Plugin name: `grapesjs-tailwind`
-* Commands
-    * `get-tailwindCss` - Get Tailwind CSS of your page
-    * `open-update-theme` - Open theme modal
-
-### `get-tailwindCss` Usage
+Load custom blocks from external sources:
 
 ```js
-// By default it will print css to console
-editor.runCommand('get-tailwindCss');
+// Add components from CDN
+editor.CustomComponents.loadFromURL('https://cdn.example.com/blocks.js');
 
-// Using options
-editor.runCommand('get-tailwindCss', { /* Options here */ });
+// Add local component
+editor.CustomComponents.addComponent({
+  id: 'my-hero',
+  label: 'Custom Hero',
+  category: 'Headers',
+  content: `<section class="bg-blue-500 text-white p-8">
+    <h1 class="text-4xl font-bold">Hello World</h1>
+  </section>`
+});
+
+// Export all components
+const allComponents = editor.CustomComponents.exportComponents();
 ```
 
-#### `get-tailwindCss` Options
+### Component Format
+```js
+{
+  "id": "unique-component-id",
+  "label": "Component Name",
+  "category": "Category Name",
+  "content": "<div class='tailwind-html'>Content</div>",
+  "media": "data:image/svg+xml;base64,..." // Optional preview icon
+}
+```
+
+## 🔥 Iconify Integration
+
+Access 150,000+ icons from 120+ icon sets:
+
+```js
+// Search icons
+const icons = await editor.Iconify.searchIcons('arrow');
+
+// Get specific icon SVG
+const iconSVG = await editor.Iconify.getIconSVG('heroicons:arrow-right');
+
+// Available icon sets
+const iconSets = editor.Iconify.getIconSets();
+```
+
+## 🎛️ Plugin Options
 
 | Option | Description | Default |
 |-|-|-
-| `callback` | Calback for resulting css | `twcss => console.log(twcss)` |
+| `tailwindPlayCdn` | Tailwind CSS CDN URL | `https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4` |
+| `plugins` | Tailwind plugins array | `[]` |
+| `config` | Custom Tailwind config | `{}` |
+| `customComponents.enabled` | Enable custom components | `true` |
+| `customComponents.cdnEndpoints` | CDN URLs for components | `[]` |
+| `customComponents.jsonSources` | JSON sources for components | `[]` |
+| `iconify.enabled` | Enable Iconify integration | `true` |
+| `iconify.defaultIconSets` | Default icon sets to load | `['heroicons', 'lucide', 'tabler']` |
 
+## 📦 Commands
 
-## Options
+| Command | Description |
+|-|-|
+| `get-tailwindCss` | Extract optimized Tailwind CSS |
+| `open-update-theme` | Open theme customization modal |
 
-| Option | Description | Default |
-|-|-|-
-| `tailwindPlayCdn` | URL for fetching tailwind play cdn | `https://cdn.tailwindcss.com` |
-| `plugins` | array to include tailwind 1st party plugins | `[]` |
-| `config` | custom tailwind config | `{}` |
-| `changeThemeText` | Change theme modal title | `Change Theme` |
-
-
-
-## Download
-
-* CDN
-  * `https://unpkg.com/grapesjs-tailwind`
-* NPM
-  * `npm i grapesjs-tailwind`
-* GIT
-  * `git clone https://github.com/Ju99ernaut/grapesjs-tailwind.git`
-
-
-
-## Usage
-
-Directly in the browser
-```html
-<link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet"/>
-<script src="https://unpkg.com/grapesjs"></script>
-<script src="path/to/grapesjs-tailwind.min.js"></script>
-
-<div id="gjs"></div>
-
-<script type="text/javascript">
-  var editor = grapesjs.init({
-      container: '#gjs',
-      // ...
-      plugins: ['grapesjs-tailwind'],
-      pluginsOpts: {
-        'grapesjs-tailwind': { /* options */ }
-      }
-  });
-</script>
-```
-
-Modern javascript
 ```js
-import grapesjs from 'grapesjs';
-import plugin from 'grapesjs-tailwind';
-import 'grapesjs/dist/css/grapes.min.css';
-
-const editor = grapesjs.init({
-  container : '#gjs',
-  // ...
-  plugins: [plugin],
-  pluginsOpts: {
-    [plugin]: { /* options */ }
-  }
-  // or
-  plugins: [
-    editor => plugin(editor, { /* options */ }),
-  ],
+// Get optimized CSS
+editor.runCommand('get-tailwindCss', {
+  callback: (css) => console.log(css)
 });
 ```
 
+## 🌐 CDN Usage
 
+```html
+<!-- Main plugin -->
+<script src="https://unpkg.com/grapesjs-tailwind-iconify"></script>
 
-## Development
+<!-- Or via JSDelivr -->
+<script src="https://cdn.jsdelivr.net/npm/grapesjs-tailwind-iconify"></script>
 
-Clone the repository
-
-```sh
-$ git clone https://github.com/Ju99ernaut/grapesjs-tailwind.git
-$ cd grapesjs-tailwind
+<!-- Standalone Custom Component Manager -->
+<script src="https://unpkg.com/grapesjs-tailwind-iconify/dist/cdn/custom-component-manager.min.js"></script>
 ```
 
-Install dependencies
+## 📥 Installation
 
-```sh
-$ npm i
+```bash
+# NPM
+npm i grapesjs-tailwind-iconify
+
+# CDN
+# See CDN usage above
 ```
 
-Start the dev server
+## 🔧 Development
 
-```sh
-$ npm start
+```bash
+git clone https://github.com/herbras/grapesjs-tailwind.git
+cd grapesjs-tailwind
+npm install
+npm start
 ```
 
-Build the source
+## 📄 License
 
-```sh
-$ npm run build
-```
+MIT License - see LICENSE file
 
+## 🙏 Credits
 
+**Original Author:** [Ju99ernaut](https://github.com/Ju99ernaut) - [grapesjs-tailwind](https://github.com/Ju99ernaut/grapesjs-tailwind)  
+**Enhanced by:** [Ibrahim Nurul Huda](https://github.com/herbras) - [Sarbeh](https://sarbeh.com)
 
-## License
+This project is a fork of the original grapesjs-tailwind with additional features:
+- Custom Components Manager for external block loading
+- Iconify integration with 150,000+ icons
+- Enhanced CDN distribution
 
-MIT
+Both original and enhanced versions are under MIT License.
+
+---
+
+*Powered by [GrapesJS](https://grapesjs.com/) • [Tailwind CSS](https://tailwindcss.com/) • [Iconify](https://iconify.design/)*
