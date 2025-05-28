@@ -1,6 +1,6 @@
 # Grapesjs Tailwind with custom block + Iconify
 
-[DEMO](https://herbras.github.io/grapesjs-tailwind/)
+[DEMO](https://herbras.github.io/grapesjs-tailwind-iconify/)
 
 > 🚀 **Enhanced fork** of [Ju99ernaut/grapesjs-tailwind](https://github.com/Ju99ernaut/grapesjs-tailwind) with added **Custom Components Manager** and **Iconify Icons** support.
 
@@ -188,8 +188,8 @@ npm i grapesjs-tailwind-iconify
 ## 🔧 Development
 
 ```bash
-git clone https://github.com/herbras/grapesjs-tailwind.git
-cd grapesjs-tailwind
+git clone https://github.com/herbras/grapesjs-tailwind-iconify.git
+cd grapesjs-tailwind-iconify
 npm install
 npm start
 ```
@@ -201,7 +201,7 @@ MIT License - see LICENSE file
 ## 🙏 Credits
 
 **Original Author:** [Ju99ernaut](https://github.com/Ju99ernaut) - [grapesjs-tailwind](https://github.com/Ju99ernaut/grapesjs-tailwind)  
-**Enhanced by:** [Ibrahim Nurul Huda](https://github.com/herbras) - [Sarbeh](https://sarbeh.com)
+**Forked & Enhanced by:** [Ibrahim Nurul Huda](https://github.com/herbras) - [grapesjs-tailwind-iconify](https://github.com/herbras/grapesjs-tailwind-iconify) - [Sarbeh](https://sarbeh.com)
 
 This project is a fork of the original grapesjs-tailwind with additional features:
 - Custom Components Manager for external block loading

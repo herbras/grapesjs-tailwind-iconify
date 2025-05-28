@@ -1,6 +1,6 @@
 {
     "name": "grapesjs-tailwind-iconify",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Enhanced fork of grapesjs-tailwind with Custom Components Manager and Iconify integration",
     "main": "dist/grapesjs-tailwind.min.js",
     "module": "dist/grapesjs-tailwind.esm.js",
@@ -37,18 +37,20 @@
         "page-builder",
         "visual-editor",
         "custom-components",
+        "iconify",
+        "icons",
         "cdn"
     ],
     "author": "Ibrahim Nurul Huda <ibrahim@sarbeh.com>",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/herbras/grapesjs-tailwind.git"
+        "url": "git+https://github.com/herbras/grapesjs-tailwind-iconify.git"
     },
     "bugs": {
-        "url": "https://github.com/herbras/grapesjs-tailwind/issues"
+        "url": "https://github.com/herbras/grapesjs-tailwind-iconify/issues"
     },
-    "homepage": "https://herbras.github.io/grapesjs-tailwind/",
+    "homepage": "https://herbras.github.io/grapesjs-tailwind-iconify/",
     "peerDependencies": {
         "grapesjs": "^0.19.0 || ^0.20.0 || ^0.21.0"
     },
