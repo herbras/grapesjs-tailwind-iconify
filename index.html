@@ -8,15 +8,11 @@
 </head>
 <body>
   <div id="gjs" style="height:100vh;overflow:hidden"></div>
-
-  <!-- Load GrapesJS core -->
   <script src="https://unpkg.com/grapesjs"></script>
-  <!-- Load your built plugin from public folder as a UMD script -->
-  <script src="/grapesjs-tailwind.min.js"></script>
+  <script src="https://unpkg.com/grapesjs-tailwind-iconify"></script>
 
-  <!-- Initialize editor using the global plugin variable -->
   <script>
-    // Plugin attaches to window.GrapesjsTailwind (UMD build name)
+
     const plugin = window.GrapesjsTailwind;
 
     const editor = grapesjs.init({
